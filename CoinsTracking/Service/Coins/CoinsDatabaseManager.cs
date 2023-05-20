@@ -45,7 +45,8 @@ namespace CoinsTracking.Service
             return new SqlConnection(connectionString);
         }
         private static async Task UpdateCoinsTable(string connectionString, List<CoinsTable> coinsToUpdate)
-        {
+        {// this code assume that LastUpdated in the database is update by himself(as should be as i know at least)
+            //like i made a triger there that do that but noramly i think its the job of the database to update columns create at and update at... or not?
             DataTable coinDataTempTable = CreateAndFillTempCoinData(coinsToUpdate);
             using (SqlConnection connectionToCoinDatabase = SqlConnectionFunction(connectionString))
             {
