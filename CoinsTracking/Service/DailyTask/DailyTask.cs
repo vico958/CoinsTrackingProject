@@ -7,7 +7,7 @@ namespace CoinsTracking.Service
         static System.Timers.Timer timer;
         public static void RunEveryDay()
         {
-            timer = new System.Timers.Timer(2 * 60 * 100); // 2 minutes in milliseconds 2 * 60 * 1000
+            timer = new System.Timers.Timer(2 * 60 * 100);
             timer.Elapsed += TimerElapsedAsync;
             timer.Start();
             Console.WriteLine("Press any key to exit.");

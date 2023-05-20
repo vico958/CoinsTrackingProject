@@ -1,7 +1,7 @@
 ﻿namespace CoinsTracking.Service.JsonObjects
 {
     public class CoinObject
-    {
+    {//i know that i dont need all the attributes but i did all i think
         public string id { get; set; }
         public string rank { get; set; }
         public string symbol { get; set; }

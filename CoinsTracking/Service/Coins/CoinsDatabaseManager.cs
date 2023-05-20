@@ -65,7 +65,7 @@ namespace CoinsTracking.Service
                     ";
                     string dropTempCoinsTable = "DROP TABLE #TempCoins";
                     await ExecuteCommandAsync(command, createTemporaryTable);
-                    InsertCoinDataIntoTemporaryTable(coinDataTempTable, connectionToCoinDatabase);
+                    InsertTempCoinDataIntoTemporaryTable(coinDataTempTable, connectionToCoinDatabase);
                     await ExecuteCommandAsync(command, updateCoinsTable);
                     await ExecuteCommandAsync(command, dropTempCoinsTable);
                     await connectionToCoinDatabase.CloseAsync();
@@ -79,8 +79,6 @@ namespace CoinsTracking.Service
             DataTable coinDataTempTable = new DataTable();
             coinDataTempTable.Columns.Add("CoinName", typeof(string));
             coinDataTempTable.Columns.Add("PriceUsd", typeof(SqlMoney));
-            coinDataTempTable.Columns.Add("CreateDate", typeof(DateTime));
-            coinDataTempTable.Columns.Add("LastUpdated", typeof(DateTime));
             foreach (var coin in coinsToUpdate)
             {
                 coinDataTempTable.Rows.Add(coin.CoinName, coin.PriceUsd);
@@ -89,7 +87,7 @@ namespace CoinsTracking.Service
             return coinDataTempTable;
         }
 
-        private static void InsertCoinDataIntoTemporaryTable(DataTable coinData, SqlConnection connectionToCoinDatabase)
+        private static void InsertTempCoinDataIntoTemporaryTable(DataTable coinData, SqlConnection connectionToCoinDatabase)
         {
             using (SqlBulkCopy bulkCopy = new SqlBulkCopy(connectionToCoinDatabase))
             {
