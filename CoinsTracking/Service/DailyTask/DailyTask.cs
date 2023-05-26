@@ -7,7 +7,7 @@ namespace CoinsTracking.Service
         static System.Timers.Timer timer;
         public static void RunEveryDay()//assume it run each 24 hours and not each 2 min, better for the checking...
         {
-            timer = new System.Timers.Timer(2 * 60 * 1000);
+            timer = new System.Timers.Timer(2 * 60 * 100);
             timer.Elapsed += TimerElapsedAsync;
             timer.Start();
             Console.WriteLine("Press any key to exit.");
@@ -18,7 +18,7 @@ namespace CoinsTracking.Service
         private static async void TimerElapsedAsync(object sender, ElapsedEventArgs e)
         {
             Console.WriteLine("Executing the task...");
-            Server server = new Server();
+            Program server = new Program();
             await server.UpdateCoinsData();
             await server.PrintAllCoinsData();
             Console.WriteLine("Task completed.");

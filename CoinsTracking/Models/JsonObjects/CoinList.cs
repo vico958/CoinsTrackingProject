@@ -1,4 +1,4 @@
-﻿namespace CoinsTracking.Service.JsonObjects
+﻿namespace CoinsTracking.Models.JsonObjects
 {
     public class CoinList
     {
