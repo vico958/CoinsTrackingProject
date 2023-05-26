@@ -1,10 +1,13 @@
 ﻿using System.Text.Json;
-using CoinsTracking.Service.JsonObjects;
 using CoinsTracking.Service.Coins;
+using CoinsTracking.Service.Repo;
+using CoinsTracking.Models;
+using CoinsTracking.Models.JsonObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoinsTracking.Service
 {
-    public class Server
+    public class Program
     {
         private readonly HttpClient httpClient = new HttpClient();
         private readonly string apiUrl = "https://api.coincap.io/v2/assets";
@@ -52,7 +55,10 @@ namespace CoinsTracking.Service
         }
         public static async Task Main(string[] args)
         {
-            DailyTask.RunEveryDay();
+            /*            DailyTask.RunEveryDay();*/
+            var x = new Program();
+            await x.UpdateCoinsData();
+            await x.PrintAllCoinsData();
         }
     }
 

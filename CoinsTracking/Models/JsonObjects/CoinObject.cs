@@ -1,4 +1,4 @@
-﻿namespace CoinsTracking.Service.JsonObjects
+﻿namespace CoinsTracking.Models.JsonObjects
 {
     public class CoinObject
     {//i know that i dont need all the attributes but i did all i think
