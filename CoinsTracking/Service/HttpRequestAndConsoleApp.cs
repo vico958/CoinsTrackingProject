@@ -17,12 +17,12 @@ namespace CoinsTracking.Service
         private readonly CoinsManager _coinsManager;
         public HttpRequestAndConsoleApp(CoinsManager coinsManager) {
             _coinsManager = coinsManager;
+                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiUrl}");
         }
         public async Task UpdateCoinsData()
         {
             try
             {
-                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiUrl}");
                 HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
                 var json = await response.Content.ReadAsStringAsync();
                 CoinList coinObject = JsonSerializer.Deserialize<CoinList>(json);
