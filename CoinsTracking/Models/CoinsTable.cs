@@ -10,7 +10,9 @@ namespace CoinsTracking.Models
         [Key]
         public string CoinName { get; set; }
         public decimal PriceUsd { get; set; }
-        public DateTime CreateDate { get; private set; }
-        public DateTime LastUpdated { get; private set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime CreateDate { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public DateTime LastUpdated { get; set; }
     }
 }
