@@ -1,18 +1,20 @@
 ﻿using CoinsTracking.Models;
-using CoinsTracking.Service.Repo;
 
 namespace CoinsTracking.Service.Coins
 {
     public class CoinsManager
     {
-        private readonly DatabaseRequests databaseRequestsManager = new DatabaseRequests();
+        private readonly DatabaseRequests _databaseRequestsManager;
+        public CoinsManager(DatabaseRequests databaseRequests) {
+            _databaseRequestsManager = databaseRequests;
+        }
         public async Task<List<CoinsTable>> GetAllCoinsDataAsync()
         {
-            return await databaseRequestsManager.GetAllDataAsync();
+            return await _databaseRequestsManager.GetAllDataAsync();
         }
         public async Task<bool> UpdateDatabaseAsync(List<CoinsTable> coinsToUpdate)
         {
-            return await databaseRequestsManager.UpdateDatabaseAsync(coinsToUpdate);
+            return await _databaseRequestsManager.UpdateDatabaseAsync(coinsToUpdate);
         }
     }
 }

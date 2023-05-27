@@ -1,6 +1,6 @@
 ﻿using CoinsTracking.Models;
 using Microsoft.EntityFrameworkCore;
-namespace CoinsTracking.Service.Repo
+namespace CoinsTracking.Service
 {
     public class DatabaseSettings:DbContext
     {

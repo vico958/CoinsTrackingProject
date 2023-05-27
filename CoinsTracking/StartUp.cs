@@ -1,17 +1,26 @@
-﻿/*using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using CoinsTracking.Service;
+using CoinsTracking.Service.Coins;
 using Microsoft.Extensions.DependencyInjection;
 
-public class StartUp
+namespace CoinsTracking
 {
-    public void ConfigureServices(IServiceCollection services)
+    public class Startup
     {
-        // Configure services, such as adding database context, authentication, etc.
-    }
+        private readonly IServiceCollection _services;
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        // Configure middleware pipeline, such as adding routing, error handling, etc.
+        public Startup(IServiceCollection services)
+        {
+            _services = services;
+        }
+
+        public void ConfigureServices()
+        {
+            // Register your services here
+            _services.AddTransient<CoinsManager>();
+            _services.AddTransient<DatabaseRequests>();
+            _services.AddTransient<HttpRequestAndConsoleApp>();
+            _services.AddTransient<DailyTask>();
+            _services.AddTransient<DatabaseSettings>();
+        }
     }
 }
-*/

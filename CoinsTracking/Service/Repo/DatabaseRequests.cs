@@ -2,11 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
-namespace CoinsTracking.Service.Repo
+namespace CoinsTracking.Service
 {
     public class DatabaseRequests
     {
-        private readonly DatabaseSettings db = new DatabaseSettings();
+        private readonly DatabaseSettings db;
+        public DatabaseRequests(DatabaseSettings databaseSettings) {
+            db = databaseSettings;
+        }
         public async Task<List<CoinsTable>> GetAllDataAsync()
         {
             return await db.coins.ToListAsync();

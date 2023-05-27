@@ -2,10 +2,16 @@
 
 namespace CoinsTracking.Service
 {
-    public static class DailyTask
+    public class DailyTask
     {
         static System.Timers.Timer timer;
-        public static void RunEveryDay()//assume it run each 24 hours and not each 2 min, better for the checking...
+        private readonly HttpRequestAndConsoleApp _httpRequestAndConsoleApp;
+        public DailyTask(HttpRequestAndConsoleApp httpRequestAndConsoleApp)
+        {
+            _httpRequestAndConsoleApp = httpRequestAndConsoleApp;
+        }
+
+        public void RunEveryDay()//assume it run each 24 hours and not each 2 min, better for the checking...
         {
             timer = new System.Timers.Timer(2 * 60 * 100);
             timer.Elapsed += TimerElapsedAsync;
@@ -15,12 +21,11 @@ namespace CoinsTracking.Service
             timer.Stop();
             timer.Dispose();
         }
-        private static async void TimerElapsedAsync(object sender, ElapsedEventArgs e)
+        private async void TimerElapsedAsync(object sender, ElapsedEventArgs e)
         {
             Console.WriteLine("Executing the task...");
-            Program server = new Program();
-            await server.UpdateCoinsData();
-            await server.PrintAllCoinsData();
+            await _httpRequestAndConsoleApp.UpdateCoinsData();
+            await _httpRequestAndConsoleApp.PrintAllCoinsData();
             Console.WriteLine("Task completed.");
         }
     }
