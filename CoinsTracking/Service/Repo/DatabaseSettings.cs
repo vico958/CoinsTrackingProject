@@ -30,5 +30,28 @@ namespace CoinsTracking.Service.Repo
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            UpdateModifiedDates();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void UpdateModifiedDates()
+        {
+            var modifiedEntries = ChangeTracker.Entries<CoinsTable>();
+            foreach (var entry in modifiedEntries)
+            {
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.LastUpdated = DateTime.Now;
+                }
+                else if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreateDate = DateTime.Now;
+                    entry.Entity.LastUpdated = DateTime.Now;
+                }
+            }
+        }
     }
 }

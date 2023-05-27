@@ -30,7 +30,6 @@ namespace CoinsTracking.Service.Repo
             }
             catch (Exception ex)
             {
-                // Log or print the exception details
                 Console.WriteLine($"Exception: {ex.Message}");
                 Console.WriteLine($"Inner Exception: {ex.InnerException?.Message}");
                 Console.WriteLine($"Stack Trace: {ex.StackTrace}");
@@ -54,16 +53,5 @@ namespace CoinsTracking.Service.Repo
             }
             return true;
         }
-        /*        public async Task<bool> UpdateDatabaseAsync(List<CoinsTable> coinsToUpdate)
-                {
-                        var transaction = db.Database.BeginTransaction(IsolationLevel.Serializable);
-                    CoinsTable coinsTable = db.coins.FirstOrDefault(x => x.CoinName.Equals("check2"));
-                    Console.WriteLine($" i am  {coinsTable.CoinName}, {coinsTable.PriceUsd}");
-                    coinsTable.PriceUsd = 1033;;
-                        int updates = db.SaveChanges();
-                    Console.WriteLine(updates);
-                        transaction.Commit(); // solves the problem
-                    return true;
-                }*/
     }
 }
