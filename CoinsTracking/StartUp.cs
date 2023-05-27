@@ -16,11 +16,11 @@ namespace CoinsTracking
         public void ConfigureServices()
         {
             // Register your services here
-            _services.AddTransient<CoinsManager>();
-            _services.AddTransient<DatabaseRequests>();
-            _services.AddTransient<HttpRequestAndConsoleApp>();
-            _services.AddTransient<DailyTask>();
-            _services.AddTransient<DatabaseSettings>();
+            _services.AddSingleton<CoinsManager>();
+            _services.AddSingleton<DatabaseRequests>();
+            _services.AddSingleton<HttpRequestAndConsoleApp>();
+            _services.AddSingleton<DailyTask>();
+            _services.AddSingleton<DatabaseSettings>();
         }
     }
 }
